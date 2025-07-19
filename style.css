@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+
+@keyframes swing {
+  0%, 100% { transform: rotate(0deg); }
+  50%       { transform: rotate(30deg); }
+  75%       { transform: rotate(-30deg); }
+}
+
+/* define custom animation shorthand */
+@theme {
+  --animate-swing: swing 4s ease-in-out infinite;
+}

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 
 @keyframes swing {
@@ -8,6 +9,6 @@
 }
 
 /* define custom animation shorthand */
-@theme {
+:root {
   --animate-swing: swing 4s ease-in-out infinite;
 }

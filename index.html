@@ -7,10 +7,83 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     />
+    <!-- <script>
+      const icon = document.getElementById("theme-icon");
+
+      function updateThemeIcon(theme) {
+        icon.src =
+          theme === "dark"
+            ? "dark_mode_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg"
+            : "light_mode_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg";
+      }
+
+      function changeMode() {
+        const html = document.documentElement;
+        if (
+          localStorage.theme === "dark" ||
+          (!("theme" in localStorage) &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          html.classList.remove("dark");
+          localStorage.theme = "light";
+          updateThemeIcon("light");
+        } else {
+          html.classList.add("dark");
+          localStorage.theme = "dark";
+          updateThemeIcon("dark");
+        }
+      }
+
+      // Initialize on load
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme =
+          localStorage.theme ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+        if (savedTheme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+        updateThemeIcon(savedTheme);
+      });
+    </script> -->
   </head>
 
-  <body class="bg-zinc-50  p-0 m-0 dark dark:bg-black">
-    <div class="scroll-button fixed bottom-6 right-4 z-50 ">
+  <body class="bg-zinc-50 p-0 m-0 dark:bg-black">
+    <script>
+      const html = document.documentElement;
+      let icon;
+
+      function setTheme(theme) {
+        if (theme === "dark") {
+          html.classList.add("dark");
+          icon.src = "dark_mode_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg";
+        } else {
+          html.classList.remove("dark");
+          icon.src = "light_mode_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg";
+        }
+        localStorage.setItem("theme", theme);
+      }
+
+      function toggleTheme() {
+        const current = html.classList.contains("dark") ? "dark" : "light";
+        const next = current === "dark" ? "light" : "dark";
+        setTheme(next);
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        icon = document.getElementById("themeIcon"); // Moved here to ensure it's loaded
+        const saved = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        setTheme(saved || (prefersDark ? "dark" : "light"));
+      });
+    </script>
+
+    <div class="scroll-button fixed bottom-6 right-4 z-50">
       <a
         href="#home"
         class="bg-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-white p-3 rounded-full hover:bg-zinc-00 text-xl transition"
@@ -19,10 +92,13 @@
       </a>
     </div>
 
-    <section id="home" class="max-w-[1130px] mx-auto px-4 bg-white dark:bg-zinc-900  ring-1 ring-white dark:ring-zinc-300/20 min-h-screen">
+    <section
+      id="home"
+      class="max-w-[1130px] mx-auto px-4 bg-white dark:bg-zinc-900 ring-1 ring-white dark:ring-zinc-300/20 min-h-screen"
+    >
       <div class="flex justify-center absolute right-1/3">
         <ul
-          class="flex bg-white dark:bg-zinc-800 mt-6 justify-evenly [&>*]:text-sm [&>*]:font-semibold w-96 [&>*]:px-2 py-3  ring-slate-100 shadow text-black dark:text-white rounded-3xl [&>*]:hover:text-blue-300"
+          class="flex bg-white dark:bg-zinc-800 mt-6 justify-evenly [&>*]:text-sm [&>*]:font-semibold w-96 [&>*]:px-2 py-3 ring-slate-100 shadow text-black dark:text-white rounded-3xl [&>*]:hover:text-blue-300"
         >
           <li><a href="">About</a></li>
           <li><a href="">Articles</a></li>
@@ -31,11 +107,17 @@
         </ul>
       </div>
       <div class="relative flex">
-        <img
-          class="absolute top-5 right-10 ring-1 ring-slate-100 dark:ring-zinc-800 dark:bg-zinc-800 shadow rounded-2xl size-10 hover:cursor-pointer"
-          src="https://cdn2.iconfinder.com/data/icons/unigrid-phantom-multimedia-vol-1/60/020_009_brightness_low_small_sun-512.png"
-          alt=""
-        />
+        <button
+          onclick="toggleTheme()"
+          class="absolute top-5 right-10 ring-1 ring-slate-100 dark:ring-zinc-700 dark:bg-zinc-800 shadow rounded-2xl size-10 hover:cursor-pointer"
+        >
+          <img
+            id="themeIcon"
+            class="w-6 h-6 ml-2"
+            src="light_mode_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg"
+            alt="toggle mode"
+          />
+        </button>
       </div>
       <div>
         <img
@@ -43,7 +125,7 @@
           src="New Template-Photoroom (1).jpg"
           alt=""
         />
-        <h1 class="pt-5 ml-10 text-zinc-800  dark:text-white font-bold text-4xl">
+        <h1 class="pt-5 ml-10 text-zinc-800 dark:text-white font-bold text-4xl">
           Software developer,UI designer,<br />
           and Code Architect.
         </h1>
@@ -80,53 +162,62 @@
         </div>
       </div>
 
-    
-    <div class="-mx-10 mt-12 flex justify-center gap-6 overflow-hidden">
-  <!-- Image 1 -->
-  <div class="relative w-[550px] h-[340px] rounded-2xl overflow-hidden rotate-[-2deg]">
-    <img
-      src="10d60d15-23e2-4716-8f17-e0b275aa6ec0.jpeg"
-      class="absolute inset-0 w-full h-full object-cover"
-      alt="Image"
-    />
-  </div>
+      <div class="-mx-10 mt-12 flex justify-center gap-6 overflow-hidden">
+        <!-- Image 1 -->
+        <div
+          class="relative w-[550px] h-[340px] rounded-2xl overflow-hidden rotate-[-2deg]"
+        >
+          <img
+            src="10d60d15-23e2-4716-8f17-e0b275aa6ec0.jpeg"
+            class="absolute inset-0 w-full h-full object-cover"
+            alt="Image"
+          />
+        </div>
 
-  <!-- Image 2 -->
-  <div class="relative w-[550px] h-[340px] rounded-2xl overflow-hidden rotate-[2deg]">
-    <img
-      src="credits to the owner.jpeg"
-      class="absolute inset-0 w-full h-full object-cover"
-      alt="Image"
-    />
-  </div>
+        <!-- Image 2 -->
+        <div
+          class="relative w-[550px] h-[340px] rounded-2xl overflow-hidden rotate-[2deg]"
+        >
+          <img
+            src="credits to the owner.jpeg"
+            class="absolute inset-0 w-full h-full object-cover"
+            alt="Image"
+          />
+        </div>
 
-  <!-- Image 3 -->
-  <div class="relative w-[550px] h-[340px] rounded-2xl overflow-hidden rotate-[2deg]">
-    <img
-      src="7572e28c-2fa9-47d5-8e4a-912ee8f480b0.jpeg"
-      class="absolute inset-0 w-full h-full object-cover"
-      alt="Image"
-    />
-  </div>
+        <!-- Image 3 -->
+        <div
+          class="relative w-[550px] h-[340px] rounded-2xl overflow-hidden rotate-[2deg]"
+        >
+          <img
+            src="7572e28c-2fa9-47d5-8e4a-912ee8f480b0.jpeg"
+            class="absolute inset-0 w-full h-full object-cover"
+            alt="Image"
+          />
+        </div>
 
-  <!-- Image 4 -->
-  <div class="relative w-[550px] h-[340px] rounded-2xl overflow-hidden rotate-[-2deg]">
-    <img
-      src="ecb19d05437224453d46519bab1c1eac.jpg"
-      class="absolute inset-0 w-full h-full object-cover"
-      alt="Image"
-    />
-  </div>
+        <!-- Image 4 -->
+        <div
+          class="relative w-[550px] h-[340px] rounded-2xl overflow-hidden rotate-[-2deg]"
+        >
+          <img
+            src="ecb19d05437224453d46519bab1c1eac.jpg"
+            class="absolute inset-0 w-full h-full object-cover"
+            alt="Image"
+          />
+        </div>
 
-  <!-- Image 5 -->
-  <div class="relative w-[550px] h-[340px] rounded-2xl overflow-hidden rotate-[2deg]">
-    <img
-      src="The Reward of Resilience_ The Journey to Achieving….jpeg"
-      class="absolute inset-0 w-full h-full object-cover"
-      alt="Image"
-    />
-  </div>
-</div>
+        <!-- Image 5 -->
+        <div
+          class="relative w-[550px] h-[340px] rounded-2xl overflow-hidden rotate-[2deg]"
+        >
+          <img
+            src="The Reward of Resilience_ The Journey to Achieving….jpeg"
+            class="absolute inset-0 w-full h-full object-cover"
+            alt="Image"
+          />
+        </div>
+      </div>
 
       <div class="flex justify-between">
         <div class="flex-col [&>*]:pb-6 [&>*]:mt-10 [&>*]:ml-8">
@@ -197,7 +288,9 @@
             <div class="flex-col pl-3 pr-3">
               <div class="flex pl-3 pt-3 pb-0">
                 <i class="fas fa-envelope text-zinc-500 text-lg mt-1"></i>
-                <h2 class="font-semibold dark:text-white ml-4 pt-0">Stay up to date</h2>
+                <h2 class="font-semibold dark:text-white ml-4 pt-0">
+                  Stay up to date
+                </h2>
               </div>
 
               <div class="pl-3 pb-0 pt-2">
@@ -211,7 +304,7 @@
                 <input
                   type="text"
                   placeholder="Email Address"
-                  class="ring-1 focus:ring-blue-200 dark:bg-zinc-800 dark:text-zinc-400 focus:outline-none  dark:ring-zinc-300/20 focus:shadow ring-zinc-50 rounded-l-md rounded-r-lg mt-2 py-2 px-3 h-9 w-70"
+                  class="ring-1 focus:ring-blue-200 dark:bg-zinc-800 dark:text-zinc-400 focus:outline-none dark:ring-zinc-300/20 focus:shadow ring-zinc-50 rounded-l-md rounded-r-lg mt-2 py-2 px-3 h-9 w-70"
                 />
                 <button
                   class="hover:bg-zinc-700 dark:bg-zinc-700 hover:dark:bg-zinc-600 rounded-l-md rounded-r-md py-2 bg-black text-white px-3 ml-5"
@@ -238,7 +331,9 @@
                     class="size-10 rounded-full border-6 border-white mt-5 ring-3 ring-zinc-100"
                   />
                   <div class="">
-                    <h2 class="font-semibold dark:text-white mt-6 ml-3">Fever</h2>
+                    <h2 class="font-semibold dark:text-white mt-6 ml-3">
+                      Fever
+                    </h2>
                     <div class="flex ml-3 gap-x-19 mr-0">
                       <div>
                         <p class="text-zinc-500 text-sm">
@@ -247,7 +342,9 @@
                       </div>
 
                       <div>
-                        <p class="text-zinc-400 text-sm dark:text-zinc-600">2024 — Present</p>
+                        <p class="text-zinc-400 text-sm dark:text-zinc-600">
+                          2024 — Present
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -260,7 +357,9 @@
                     class="size-10 rounded-full border-6 border-white mt-5 ring-3 ring-zinc-100"
                   />
                   <div class="">
-                    <h2 class="font-semibold dark:text-white mt-6 ml-3">Freelancer</h2>
+                    <h2 class="font-semibold dark:text-white mt-6 ml-3">
+                      Freelancer
+                    </h2>
                     <div class="flex ml-3 gap-x-15 mr-0">
                       <div>
                         <p class="text-zinc-500 text-sm">
@@ -269,7 +368,9 @@
                       </div>
 
                       <div>
-                        <p class="text-zinc-400 text-sm dark:text-zinc-600">2024 — Present</p>
+                        <p class="text-zinc-400 text-sm dark:text-zinc-600">
+                          2024 — Present
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -282,14 +383,18 @@
                     class="size-10 rounded-full border-6 border-white mt-5 ring-3 ring-zinc-100"
                   />
                   <div class="">
-                    <h2 class="font-semibold dark:text-white mt-6 ml-3">Coursera</h2>
+                    <h2 class="font-semibold dark:text-white mt-6 ml-3">
+                      Coursera
+                    </h2>
                     <div class="flex ml-3 gap-x-22 mr-0">
                       <div>
                         <p class="text-zinc-500 text-sm">UX Design Trainee</p>
                       </div>
 
                       <div>
-                        <p class="text-zinc-400 text-sm dark:text-zinc-600">2024 — Present</p>
+                        <p class="text-zinc-400 text-sm dark:text-zinc-600">
+                          2024 — Present
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -302,7 +407,9 @@
                     class="size-10 rounded-full border-6 border-white mt-5 ring-3 ring-zinc-100"
                   />
                   <div class="">
-                    <h2 class="font-semibold dark:text-white mt-6 ml-3">GitHub</h2>
+                    <h2 class="font-semibold dark:text-white mt-6 ml-3">
+                      GitHub
+                    </h2>
                     <div class="flex ml-3 gap-x-12 mr-0">
                       <div>
                         <p class="text-zinc-500 text-sm">
@@ -311,7 +418,9 @@
                       </div>
 
                       <div>
-                        <p class="text-zinc-400 text-sm dark:text-zinc-600">2024 — Present</p>
+                        <p class="text-zinc-400 text-sm dark:text-zinc-600">
+                          2024 — Present
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -322,7 +431,9 @@
             <div
               class="flex mt-8 bg-zinc-50 dark:bg-zinc-800 hover:dark:bg-zinc-700 ml-4 mb-4 w-90 h-9 justify-center hover:cursor-pointer hover:bg-zinc-100 gap-4 rounded-l-md rounded-r-md"
             >
-              <button class="text-black text-center dark:text-white hover:cursor-pointer font-semibold">
+              <button
+                class="text-black text-center dark:text-white hover:cursor-pointer font-semibold"
+              >
                 Download CV
               </button>
               <i class="fas fa-arrow-down text-sm text-zinc-400 mt-3"></i>
@@ -334,16 +445,24 @@
       <footer class="border-t-1 border-zinc-200 mt-25">
         <div class="flex justify-between">
           <div class="flex space-x-4 ml-8 mt-10 mb-15">
-            <a href="#" class="text-black font-semibold dark:text-white hover:text-blue-300"
+            <a
+              href="#"
+              class="text-black font-semibold dark:text-white hover:text-blue-300"
               >About</a
             >
-            <a href="#" class="text-black font-semibold dark:text-white hover:text-blue-300"
+            <a
+              href="#"
+              class="text-black font-semibold dark:text-white hover:text-blue-300"
               >Projects</a
             >
-            <a href="#" class="text-black font-semibold dark:text-white hover:text-blue-300"
+            <a
+              href="#"
+              class="text-black font-semibold dark:text-white hover:text-blue-300"
               >Speakings</a
             >
-            <a href="#" class="text-black font-semibold dark:text-white hover:text-blue-300"
+            <a
+              href="#"
+              class="text-black font-semibold dark:text-white hover:text-blue-300"
               >Uses</a
             >
           </div>

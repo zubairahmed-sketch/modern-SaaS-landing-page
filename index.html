@@ -54,7 +54,7 @@
       id="home"
       class="max-w-[1130px] mx-auto px-4 bg-white dark:bg-zinc-900 ring-1 ring-white dark:ring-zinc-300/20 min-h-screen"
     >
-      <div class="flex justify-center absolute right-1/3">
+      <div class="flex sm:justify-start  lg:justify-center lg:absolute lg:right-1/3 ">
         <ul
           class="flex bg-white dark:bg-zinc-800 mt-6 justify-evenly [&>*]:text-sm [&>*]:font-semibold w-96 [&>*]:px-2 py-3 ring-slate-100 shadow text-black dark:text-white rounded-3xl [&>*]:hover:text-blue-300"
         >
@@ -120,7 +120,10 @@
         </div>
       </div>
 
-      <div id="projects" class="-mx-10 mt-12 flex justify-center gap-6 overflow-hidden">
+      <div
+        id="projects"
+        class="-mx-10 mt-12 flex justify-center gap-6 overflow-hidden"
+      >
         <!-- Image 1 -->
         <div
           class="relative w-[550px] h-[340px] rounded-2xl overflow-hidden rotate-[-2deg]"
@@ -178,7 +181,7 @@
       </div>
 
       <div class="flex justify-between">
-        <div class="flex-col [&>*]:pb-6 [&>*]:mt-10 [&>*]:ml-8 " id="articles">
+        <div class="flex-col [&>*]:pb-6 [&>*]:mt-10 [&>*]:ml-8" id="articles">
           <div
             class="hover:bg-zinc-50 hover:dark:bg-zinc-800 hover:cursor-pointer w-[490px] p-2 [&>*]:p-2 rounded-2xl"
           >
@@ -241,7 +244,8 @@
 
         <div class="flex-col mr-8">
           <div
-            id="contact" class="border-1 shadow border-zinc-100 dark:border-zinc-300/20 w-[400px] h-[175px] rounded-2xl mt-17"
+            id="contact"
+            class="border-1 shadow border-zinc-100 dark:border-zinc-300/20 w-[400px] h-[175px] rounded-2xl mt-17"
           >
             <div class="flex-col pl-3 pr-3">
               <div class="flex pl-3 pt-3 pb-0">
@@ -264,7 +268,8 @@
                   placeholder="Email Address"
                   class="ring-1 focus:ring-blue-200 dark:bg-zinc-800 dark:text-zinc-400 focus:outline-none dark:ring-zinc-300/20 focus:shadow ring-zinc-50 rounded-l-md rounded-r-lg mt-2 py-2 px-3 h-9 w-70"
                 />
-                <button onclick="alert('Thanks for subscribing!')"
+                <button
+                  onclick="alert('Thanks for subscribing!')"
                   class="hover:bg-zinc-700 dark:bg-zinc-700 hover:dark:bg-zinc-600 rounded-l-md rounded-r-md py-2 bg-black text-white px-3 ml-5"
                 >
                   Join
@@ -389,14 +394,14 @@
             <div
               class="flex mt-8 bg-zinc-50 dark:bg-zinc-800 hover:dark:bg-zinc-700 ml-4 mb-4 w-90 h-9 justify-center hover:cursor-pointer hover:bg-zinc-100 gap-4 rounded-l-md rounded-r-md"
             >
-            <a href="FullStack_Resume.pdf" download="FullStack_Resume.pdf">
-              <button
-                class="text-black text-center dark:text-white hover:cursor-pointer font-semibold"
-              >
-                Download CV
-              </button>
-            </a>
-              
+              <a href="FullStack_Resume.pdf" download="FullStack_Resume.pdf">
+                <button
+                  class="text-black text-center dark:text-white hover:cursor-pointer font-semibold"
+                >
+                  Download CV
+                </button>
+              </a>
+
               <i class="fas fa-arrow-down text-sm text-zinc-400 mt-3"></i>
             </div>
           </div>
